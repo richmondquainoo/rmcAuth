@@ -66,6 +66,7 @@ public class AuthenticationController {
           }
   )
   public ResponseEntity<?> registerAppUser(@RequestBody User request) throws MessagingException {
+    System.out.println("THE PASSWORD :" + request.getPassword());
     Date date = new Date();
     //Check whether user exists in the database first.
     Optional<User> appUserExist = repository.findByEmail(request.getEmail());
@@ -122,6 +123,7 @@ public class AuthenticationController {
   @PostMapping("/verify")
   public ResponseEntity<?> verifyOtp(@RequestBody OtpModel req) {
     try {
+      log.info("FIND LATEST USER BY EMAIL: " + userModelRepository.findLatestByEmail(req.getEmail())  );
       if(userModelRepository.findLatestByEmail(req.getEmail()) != null){
         return new ResponseEntity<>(new Verification("User already exists", false), HttpStatus.BAD_REQUEST);
       }
@@ -146,6 +148,8 @@ public class AuthenticationController {
             user.setEmail(req.getEmail());
             user.setPassword(otpModel.getPassword());
 
+            log.info("user model to be saved{} :", user);
+
             userModelRepository.save(user);
             return new ResponseEntity<>(new Verification("Valid OTP", true), HttpStatus.OK);
           } else {
@@ -162,12 +166,43 @@ public class AuthenticationController {
   }
 
 
-  
+//  @PostMapping("/authenticate")
+//  public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request) {
+//
+//
+//    return ResponseEntity.ok(service.authenticate(request));
+//  }
+
 
 
   @PostMapping("/authenticate")
-  public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request) {
-    return ResponseEntity.ok(service.authenticate(request));
+  public ResponseEntity<?> authenticate(@RequestBody User req){
+    log.error("User request body: {}", req);
+    try {
+      log.error("User request body: {}", req);
+      boolean authenticated =  service.isAuthenticated(req.getEmail(), req.getPassword());
+      if(authenticated){
+        Optional<UserModel> user = service.findByUsername(req.getEmail());
+        user.get().setPassword("****");
+        return ResponseHandler.handleResponse(
+                "Authentication successful",
+                HttpStatus.OK,
+                user
+        );
+      }
+      return ResponseHandler.ErrorResponse(
+              "Authentication failed",
+              HttpStatus.OK,
+              true
+      );
+    }catch (Exception e){
+      log.error("Authentication error: {}",e.getMessage());
+      return ResponseHandler.ErrorResponse(
+              "Server Error",
+              HttpStatus.OK,
+              true
+      );
+    }
   }
 
 
