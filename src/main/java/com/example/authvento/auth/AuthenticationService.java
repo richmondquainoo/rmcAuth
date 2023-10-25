@@ -2,8 +2,10 @@ package com.example.authvento.auth;
 
 import com.example.authvento.config.JwtService;
 import com.example.authvento.model.OtpModel;
+import com.example.authvento.model.ResetUserModel;
 import com.example.authvento.model.UserModel;
 import com.example.authvento.repository.OtpRepository;
+import com.example.authvento.repository.ResetUserRepository;
 import com.example.authvento.repository.UserModelRepository;
 import com.example.authvento.user.User;
 import com.example.authvento.repository.UserRepository;
@@ -15,6 +17,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Optional;
 
 @Service
@@ -27,11 +31,19 @@ public class AuthenticationService {
   private final AuthenticationManager authenticationManager;
   private final OtpRepository otpRepository;
   private final UserModelRepository userModelRepository;
+  private final ResetUserRepository resetUserRepository;
 
   public OtpModel register(OtpModel otpModel) {
     OtpModel customUser = otpRepository.save(otpModel);
     System.out.println("USER TO BE SAVED: " +customUser);
     return customUser;
+  }
+
+
+  public ResetUserModel savePasswordReset(ResetUserModel resetUserModel) {
+    ResetUserModel resetUser = resetUserRepository.save(resetUserModel);
+    System.out.println("USER TO BE SAVED FOR RESET: " +resetUser);
+    return resetUser;
   }
 
   public OtpModel successRegister(OtpModel otpModel) {
@@ -75,6 +87,22 @@ public class AuthenticationService {
 
   public Optional<UserModel> findByUsername(String email){
     return userModelRepository.findByEmail(email);
+  }
+
+//  public Optional<UserModel> findUserByID(String email){
+//    return userModelRepository.findByEmail(email);
+//  }
+
+
+  public UserModel save(UserModel user){
+    user.setPassword(passwordEncoder.encode(user.getPassword()));
+    user.setDateCreated(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+    return userModelRepository.save(user);
+  }
+
+
+  public void delete(String id){
+    userModelRepository.deleteById(Long.valueOf(id));
   }
 
 

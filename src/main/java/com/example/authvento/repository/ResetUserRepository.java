@@ -1,22 +1,20 @@
 package com.example.authvento.repository;
 
 import com.example.authvento.model.OtpModel;
-import com.example.authvento.model.UserModel;
-import jakarta.transaction.Transactional;
+import com.example.authvento.model.ResetUserModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
 
-@Transactional
-public interface UserModelRepository extends JpaRepository<UserModel, Long> {
-    Optional<UserModel> findByEmail(String email);
-
+@Repository
+public interface ResetUserRepository extends JpaRepository<ResetUserModel, Long> {
 
     @Query(nativeQuery = true, value = "" +
-            "select * from vento_users e " +
+            "select * from otp e " +
             "where e.email = :email " +
             "order by e.id desc " +
             "limit 1")
-    UserModel findLatestByEmail(String email);
+    ResetUserModel findLatestOTPByEmail(String email);
+
 }

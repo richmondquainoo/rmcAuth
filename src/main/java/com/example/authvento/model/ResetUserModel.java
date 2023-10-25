@@ -1,25 +1,28 @@
 package com.example.authvento.model;
 
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.Date;
+
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "vento_users")
-
-public class UserModel {
-
+@Table(name = "reset_users")
+public class ResetUserModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String firstName;
-    private String lastName;
+    private String firstname;
+    private String lastname;
     private String email;
+    private Integer otp;
     private String password;
     private String dateCreated;
 }

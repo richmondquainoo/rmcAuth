@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Account Created</title>
+    <link href='https://css.gg/arrow-long-right.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="path/to/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css"> -->
+
+    <!-- <link rel="stylesheet" href="style.css" /> -->
+    <!-- <script src="https://kit.fontawesome.com/225247353c.js" crossorigin="anonymous"></script> -->
+    <style>
+        html,
+        body,
+        .root {
+            background-color: rgba(210, 214, 216, 0.219);
+        }
+        
+        * {
+            padding: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+        }
+        
+        .App-container {
+            width: 700px;
+            max-width: 90%;
+            margin: 0 auto;
+            background: rgb(255, 255, 255);
+        }
+        
+        .App-header {
+            background-color: black;
+            color: white;
+            padding: 1.75rem 2rem;
+        }
+        
+        .svg-hero {
+            width: 100%;
+            height: 250px;
+        }
+        
+        .svg-hero img {
+            background: rgba(227, 244, 255, 2.219);
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        
+        .content {
+            margin: 4rem;
+            line-height: 1.5rem;
+            font-size: 1.1rem;
+            font-family: arial, sans-serif;
+        }
+        
+        .App-footer {
+            margin-top: 8rem;
+            min-height: 100px;
+            background: black;
+            padding: 1rem 3rem 0.5rem 3rem;
+            width: 100%;
+        }
+        
+        a {
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+        }
+        
+        .App-footer a,
+        .table-two a {
+            font-size: 12px;
+            font-family: arial;
+            width: 100%;
+            color: white;
+        }
+        
+        .table-two {
+            width: 100%;
+            background: black;
+            padding: 1rem 3rem 0.5rem 3rem;
+        }
+        
+        td {
+            color: white;
+            font-size: 12px;
+            font-weight: 300;
+            font-family: arial;
+            /* padding: 5px; */
+        }
+        
+        .btn {
+            display: block;
+            margin: 2rem 0;
+            font-weight: bold;
+            background-color: #266ef1;
+            border-color: #266ef1;
+            border-radius: 0px;
+            border-style: solid;
+            border-width: 13px 18px;
+            letter-spacing: 1px;
+            max-width: 300px;
+            min-width: 100px;
+            text-align: center;
+            transition: 0.2s ease-in-out;
+            color: white;
+            font-family: arial, sans-serif;
+        }
+        
+        .fa-arrow-right {
+            margin-left: 0.3rem;
+        }
+        
+        .social-icon {
+            padding-right: 1rem;
+        }
+        
+        .btn:hover {
+            box-shadow: rgba(0, 0, 0, 0.55) 1.95px 1.95px 2.6px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="App-container">
+        <header class="App-header">
+            <div style="
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            font-family: cursive;
+          ">
+                <img src="https://cbsg-static-data-files.s3.us-east-2.amazonaws.com/harmony-life/images/greenlogo.png"  style="width: 40px; height: 40px" />
+                <span> Harmony <span>Life</span></span>
+            </div>
+        </header>
+        <section class="svg-hero">
+            <img src="https://cbsg-static-data-files.s3.us-east-2.amazonaws.com/harmony-life/images/hero.png" alt="svg" />
+        </section>
+        <section class="content">
+
+
+            <p>
+                <span th:text="${email.getMessage()}"></span>
+            </p>
+            <span th:if="${email.getMessageType().equals('Institution_Account_Created')}">
+                <a th:href="${email.getUrl()}" class="btn btn-success" style="color: white">Log into your account here<i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+            </span>
+            <span th:if="${email.getMessageType().equals('Org_Account_Created')}">
+                <a th:href="${email.getUrl()}" class="btn btn-success" style="color: white">Activate your account here<i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+            </span>
+
+        </section>
+
+        <table class="App-footer">
+            <tbody class="tbody-1">
+                <tr>
+                    <td><a href="#">Help Center</a></td>
+                    <td><a href="#">Privacy</a></td>
+                </tr>
+                <tr>
+                    <td><a href="#">Unsubscribe</a></td>
+                    <td><a href="#">Email Preferences</a></td>
+                </tr>
+                <tr>
+                    <td><a href="#">Terms</a></td>
+
+                </tr>
+            </tbody>
+        </table>
+        <table class="table-two">
+
+            <tbody class="tbody-2">
+                <tr>
+                    <td><a href="#">Uber BV</a></td>
+                    <td><a href="#" class="social-icon"><i class="fa fa-facebook fa-2x" aria-hidden="true" ></i></a>
+                        <a href="#" class="social-icon"><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></a>
+                        <a href="#" class="social-icon"><i class="fa fa-instagram fa-2x" aria-hidden="true"></i></a></td>
+
+
+                </tr>
+                <tr>
+                    <td><a href="#">Mr. Treublaan</a></td>
+
+                </tr>
+                <tr>
+                    <td><a href="#">1097 DP Amsterdam</a></td>
+
+                </tr>
+                <tr>
+                    <td><a href="#">Uber.com</a></td>
+
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+</body>
+
+</html>

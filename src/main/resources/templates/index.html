@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resurrection Methodist Church</title>
+    <link href='https://css.gg/arrow-long-right.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="path/to/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css"> -->
+
+    <!-- <link rel="stylesheet" href="style.css" /> -->
+    <!-- <script src="https://kit.fontawesome.com/225247353c.js" crossorigin="anonymous"></script> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+    <style>
+        html,
+        body,
+        .root {
+            background-color: rgba(210, 214, 216, 0.219);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        * {
+            padding: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+        }
+
+        .App-container {
+            width: 700px;
+            max-width: 90%;
+            margin: 0 auto;
+            background: rgb(255, 255, 255);
+        }
+
+        .App-header {
+            background-color: darkblue;
+            color: white;
+            padding: 1.75rem 2rem;
+        }
+
+        .svg-hero {
+            width: 100%;
+            height: 250px;
+        }
+
+        .svg-hero img {
+            background: rgba(227, 244, 255, 2.219);
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .content {
+            margin: 4rem;
+            line-height: 1.5rem;
+            font-size: 1.1rem;
+            font-family: Helvetica neue, sans-serif;
+            /* font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; */
+            /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            /* font-style: italic; */
+        }
+
+        .App-footer {
+            margin-top: 8rem;
+            min-height: 100px;
+            background: darkblue;
+            padding: 1rem 3rem 0.5rem 3rem;
+            width: 100%;
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+        }
+
+        .App-footer a,
+        .table-two a {
+            font-size: 12px;
+            font-family: arial;
+            width: 100%;
+            color: white;
+        }
+
+        .table-two {
+            width: 100%;
+            background: darkblue;
+            padding: 1rem 3rem 0.5rem 3rem;
+        }
+
+        td {
+            color: white;
+            font-size: 12px;
+            font-weight: 300;
+            font-family: arial;
+            /* padding: 5px; */
+        }
+
+        .btn {
+            display: block;
+            margin: 2rem 0;
+            font-weight: bold;
+            background-color: #FFB000;
+            border-color: #FFB000;
+            border-radius: 0px;
+            border-style: solid;
+            border-width: 13px 18px;
+            letter-spacing: 1px;
+            max-width: 300px;
+            min-width: 100px;
+            text-align: center;
+            transition: 0.2s ease-in-out;
+            color: white;
+            font-family: arial, sans-serif;
+        }
+
+        .fa-arrow-right {
+            margin-left: 0.3rem;
+        }
+
+        .social-icon {
+            padding-right: 1rem;
+        }
+
+        .btn:hover {
+            box-shadow: rgba(0, 0, 0, 0.55) 1.95px 1.95px 2.6px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+<div class="App-container">
+    <header class="App-header">
+        <div style="
+            color: white;
+            font-size: 30px;
+            font-weight: bold;
+            font-family: cursive;
+          ">
+            <div class="logo-container" style="display: inline-block;">
+                <img src="https://myrmcfiles.s3.amazonaws.com/rmcIMG.jpeg" style="width: 40px; height: 40px; border-radius:50%; object-fit: cover;" />
+            </div>
+            <span>Resurrection Methodist Church<span>, Adenta</span></span>
+        </div>
+    </header>
+    <section class="svg-hero">
+        <img src="https://myrmcfiles.s3.amazonaws.com/rmcBuilding.jpeg" alt="" />
+    </section>
+    <section class="content">
+
+        <p>
+            <span th:text="${email.getMessage()}"></span>
+        </p>
+        <span th:if="${email.getMessageType().equals('Admin_Account_Created')}">
+                      <a th:href="${email.getUrl()}" class="btn btn-success" style="color: white">Verify your otp on the app<i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+
+
+        <span th:if="${email.getMessageType().equals('Mobile_Account_Created')}">
+                      <a th:href="${email.getUrl()}" class="btn btn-success" style="color: white">Account has been created successfully<i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+
+              </span>
+        <span th:if="${email.getMessageType().equals('Submission')}">
+                      <a th:href="${email.getUrl()}" class="btn btn-success" style="color: white">Log into your account here<i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+              </span>
+
+        <span th:if="${email.getMessageType().equals('Password_Reset_Successful')}">
+                      <a th:href="${email.getUrl()}" class="btn btn-success" style="color: white">Log into your account here<i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+        </span>
+
+        <span th:if="${email.getMessageType().equals('Account_Update_Successful')}">
+                      <a th:href="${email.getUrl()}" class="btn btn-success" style="color: white">Log into your account here<i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+        </span>
+
+        <span th:if="${email.getMessageType().equals('Agent_Account_Created')}">
+                      <a th:href="${email.getUrl()}" class="btn btn-success" style="color: white">Activate your account here<i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+        </span>
+
+        <span th:if="${email.getMessageType().equals('Password_Reset_OTP')}">
+                <h1 th:text="${email.getId()}"></h1>
+        </span>
+
+    </section>
+
+
+    <table class="table-two">
+
+        <tbody class="tbody-2">
+        <tr>
+            <td><a href="#">Resurrection Methodist Church</a></td>
+            <td><a href="https://www.rmc.org/" class="social-icon"><i class="fa fa-facebook fa-2x" aria-hidden="true" ></i></a>
+                <a href="https://mobile.twitter.com/rmc.com" class="social-icon"><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></a>
+                <a href="https://www.instagram.com/rmcadenta" class="social-icon"><i class="fa fa-instagram fa-2x" aria-hidden="true"></i></a></td>
+
+
+        </tr>
+        <tr>
+            <td><a href="tel:050-159-6310"> 050 159 6310</a></td>
+        </tr>
+        <tr>
+            <td><a href="https://google.com/maps/dir//Potbelly+shack/@5.6458708,-0.2056705,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0xfdf8368585d54a3:0x842f553d9ee96f0d!2m2!1d-0.1356297!2d5.6458745">Adenta, Accra</a></td>
+
+        </tr>
+        <tr>
+            <td><a href="https://potbellyshack.business.site/">rmcdenta.org</a></td>
+
+        </tr>
+        </tbody>
+
+    </table>
+</div>
+</body>
+
+</html>
